@@ -27,10 +27,10 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Set up Defold bob.jar
-        uses: dapetcu21/setup-defold-bob-jar@v3
-        with:
-          sha1: stable   # or 'beta' or a specific SHA
+    - name: Set up Defold bob.jar
+      uses: dapetcu21/setup-defold-bob-jar@v3.0.3
+      with:
+        sha1: stable     # можно 'beta' или конкретный SHA Defold
 
       - name: Resolve, build and bundle (HTML5)
         run: |
