@@ -46,6 +46,19 @@ jobs:
           java -jar .defold/bob.jar --archive --platform js-web resolve build bundle \
             --bundle-output build/web
 
+      - name: Flatten HTML5 bundle (move inner folder to build/web)
+        run: |
+          set -e
+          # найдём папку, где лежит index.html
+          BUNDLE_DIR=$(find build/web -type f -name index.html -printf '%h\n' | head -n1)
+          echo "Detected bundle dir: $BUNDLE_DIR"
+          if [ -n "$BUNDLE_DIR" ] && [ "$BUNDLE_DIR" != "build/web" ]; then
+            rsync -a "$BUNDLE_DIR"/ build/web/
+            # опционально подчистим прочие папки первого уровня
+            find build/web -mindepth 1 -maxdepth 1 -type d ! -path "$BUNDLE_DIR" -exec rm -rf {} +
+          fi
+          test -f build/web/index.html || (echo "index.html not found in build/web" && exit 1)
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
