@@ -49,6 +49,10 @@
         "/game.project"
         :cljfx-form-view
       ]
+      [
+        "/Shader/Noise animation Electric.fp"
+        :code
+      ]
     ]
   }
 }
