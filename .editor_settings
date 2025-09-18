@@ -1,0 +1,46 @@
+{
+  :build {
+    :texture-compression true
+  }
+  :code {
+    :find {
+      :term "float fil"
+    }
+  }
+  :open-assets {
+    :term "atlas"
+  }
+  :search-in-files {
+    :exts ".script"
+    :include-libraries true
+    :term "level"
+  }
+  :workflow {
+    :recent-files [
+      [
+        "/game.project"
+        :cljfx-form-view
+      ]
+      [
+        "/main/star-nest.vp"
+        :code
+      ]
+      [
+        "/main/star-nest.material"
+        :cljfx-form-view
+      ]
+      [
+        "/main/star-nest.fp"
+        :code
+      ]
+      [
+        "/main/star-nest.script"
+        :code
+      ]
+      [
+        "/main/main.collection"
+        :scene
+      ]
+    ]
+  }
+}

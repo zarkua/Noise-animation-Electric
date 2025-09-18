@@ -1,0 +1,16 @@
+function init(self)
+	self.t = 0
+	-- Поставь свои размеры из game.project, если другие
+	self.res = vmath.vector4(1280, 720, 0, 0)
+
+	-- Передадим шадертойные константы
+	model.set_constant("#model", "iResolution", self.res)
+	model.set_constant("#model", "iTime", vmath.vector4(0,0,0,0))
+
+	-- (не удаляю твой старый 'time' — можно оставить как есть)
+end
+
+function update(self, dt)
+	self.t = self.t + dt
+	model.set_constant("#model", "iTime", vmath.vector4(self.t, 0, 0, 0))
+end

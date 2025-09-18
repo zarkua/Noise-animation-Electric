@@ -1,0 +1,33 @@
+name: "default"
+scale_along_z: 0
+embedded_instances {
+  id: "star-nest"
+  data: "components {\n"
+  "  id: \"script\"\n"
+  "  component: \"/main/star-nest.script\"\n"
+  "}\n"
+  "embedded_components {\n"
+  "  id: \"model\"\n"
+  "  type: \"model\"\n"
+  "  data: \"mesh: \\\"/main/quad.dae\\\"\\n"
+  "name: \\\"unnamed\\\"\\n"
+  "materials {\\n"
+  "  name: \\\"default\\\"\\n"
+  "  material: \\\"/main/star-nest.material\\\"\\n"
+  "  textures {\\n"
+  "    sampler: \\\"iChannel0\\\"\\n"
+  "    texture: \\\"/main/texture0.png\\\"\\n"
+  "  }\\n"
+  "}\\n"
+  "\"\n"
+  "}\n"
+  ""
+  position {
+    x: 1277.0
+    y: 722.0
+  }
+  scale3 {
+    x: 1280.0
+    y: 720.0
+  }
+}

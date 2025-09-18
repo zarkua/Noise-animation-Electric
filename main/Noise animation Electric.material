@@ -1,0 +1,28 @@
+name: "star-nest"
+tags: "tile"
+vertex_program: "/main/star-nest.vp"
+fragment_program: "/main/star-nest.fp"
+vertex_constants {
+  name: "view_proj"
+  type: CONSTANT_TYPE_VIEWPROJ
+}
+fragment_constants {
+  name: "iTime"
+  type: CONSTANT_TYPE_USER
+  value {
+  }
+}
+fragment_constants {
+  name: "iResolution"
+  type: CONSTANT_TYPE_USER
+  value {
+  }
+}
+samplers {
+  name: "iChannel0"
+  wrap_u: WRAP_MODE_REPEAT
+  wrap_v: WRAP_MODE_REPEAT
+  filter_min: FILTER_MODE_MIN_LINEAR
+  filter_mag: FILTER_MODE_MAG_LINEAR
+  max_anisotropy: 0.0
+}
