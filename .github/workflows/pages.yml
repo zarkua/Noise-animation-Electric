@@ -27,19 +27,16 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
       - name: Download latest stable bob.jar (Defold)
         run: |
           set -e
           mkdir -p .defold
-          # скачиваем bob.jar из последнего релиза Defold на GitHub
-          BOB_URL=$(curl -sSL https://api.github.com/repos/defold/defold/releases/latest \
-            | python - <<'PY'
-import sys, json
-data=json.load(sys.stdin)
-print([a["browser_download_url"] for a in data["assets"] if a["name"]=="bob.jar"][0])
-PY
-          )
-          echo "bob.jar: $BOB_URL"
+          API_URL="https://api.github.com/repos/defold/defold/releases/latest"
+          BOB_URL=$(curl -sSL "$API_URL" | jq -r '.assets[] | select(.name=="bob.jar") | .browser_download_url')
+          echo "bob.jar = $BOB_URL"
           curl -L "$BOB_URL" -o .defold/bob.jar
 
       - name: Resolve, build and bundle (HTML5)
