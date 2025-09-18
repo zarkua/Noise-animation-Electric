@@ -40,4 +40,26 @@ print([a["browser_download_url"] for a in data["assets"] if a["name"]=="bob.jar"
 PY
           )
           echo "bob.jar: $BOB_URL"
-          curl -L "$BO
+          curl -L "$BOB_URL" -o .defold/bob.jar
+
+      - name: Resolve, build and bundle (HTML5)
+        run: |
+          set -e
+          java -jar .defold/bob.jar --version
+          java -jar .defold/bob.jar --archive --platform js-web resolve build bundle \
+            --bundle-output build/web
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: build/web
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
