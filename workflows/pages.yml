@@ -27,15 +27,21 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-    - name: Set up Defold bob.jar
-      uses: dapetcu21/setup-defold-bob-jar@v3.0.3
-      with:
-        sha1: stable     # можно 'beta' или конкретный SHA Defold
+      - name: Install jq
+        run: sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Download latest stable bob.jar
+        run: |
+          mkdir -p .defold
+          API_URL="https://api.github.com/repos/defold/defold/releases/latest"
+          BOB_URL=$(curl -sSL "$API_URL" | jq -r '.assets[] | select(.name=="bob.jar") | .browser_download_url')
+          echo "bob.jar = $BOB_URL"
+          curl -L "$BOB_URL" -o .defold/bob.jar
 
       - name: Resolve, build and bundle (HTML5)
         run: |
-          bob --version
-          bob --archive --platform js-web resolve build bundle \
+          java -jar .defold/bob.jar --version
+          java -jar .defold/bob.jar --archive --platform js-web resolve build bundle \
             --bundle-output build/web
 
       - name: Upload Pages artifact
