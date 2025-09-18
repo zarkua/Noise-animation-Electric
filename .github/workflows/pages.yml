@@ -27,28 +27,17 @@ jobs:
           distribution: temurin
           java-version: '21'
 
-      - name: Set up Defold bob.jar
-        uses: dapetcu21/setup-defold-bob-jar@v3
-        with:
-          sha1: stable   # можно 'beta' или конкретный SHA
-
-      - name: Resolve, build and bundle (HTML5)
+      - name: Download latest stable bob.jar (Defold)
         run: |
-          bob --version
-          bob --archive --platform js-web resolve build bundle \
-            --bundle-output build/web
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: build/web
-
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - id: deployment
-        uses: actions/deploy-pages@v4
+          set -e
+          mkdir -p .defold
+          # скачиваем bob.jar из последнего релиза Defold на GitHub
+          BOB_URL=$(curl -sSL https://api.github.com/repos/defold/defold/releases/latest \
+            | python - <<'PY'
+import sys, json
+data=json.load(sys.stdin)
+print([a["browser_download_url"] for a in data["assets"] if a["name"]=="bob.jar"][0])
+PY
+          )
+          echo "bob.jar: $BOB_URL"
+          curl -L "$BO
