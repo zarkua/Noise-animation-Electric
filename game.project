@@ -3,7 +3,7 @@ title = Shadertoy sample
 version = 0.1
 
 [bootstrap]
-main_collection = /main/main.collectionc
+main_collection = /example/main.collectionc
 
 [input]
 game_binding = /input/game.input_bindingc
@@ -18,4 +18,7 @@ scale = 0.02
 
 [script]
 shared_state = 1
+
+[library]
+include_dirs = /shader 
 

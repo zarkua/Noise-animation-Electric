@@ -18,10 +18,6 @@
   :workflow {
     :recent-files [
       [
-        "/game.project"
-        :cljfx-form-view
-      ]
-      [
         "/main/star-nest.vp"
         :code
       ]
@@ -40,6 +36,18 @@
       [
         "/main/main.collection"
         :scene
+      ]
+      [
+        "/Shader/Noise animation Electric.material"
+        :cljfx-form-view
+      ]
+      [
+        "/example/main.collection"
+        :scene
+      ]
+      [
+        "/game.project"
+        :cljfx-form-view
       ]
     ]
   }
